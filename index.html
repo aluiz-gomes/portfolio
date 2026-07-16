@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio Técnico — Seu Nome</title>
+<meta name="description" content="Portfólio técnico — Engenharia Aeroespacial e eletrônica automotiva">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f2e1f;
+    --bg-alt:#123625;
+    --bg-card:#153b28;
+    --copper:#c97c48;
+    --copper-light:#e0a877;
+    --silk:#eef3ec;
+    --silk-dim:#9fb3a6;
+    --amber:#f2a93b;
+    --line:rgba(238,243,236,0.14);
+    --radius:8px;
+    --mono:'IBM Plex Mono', 'Consolas', monospace;
+    --display:'Rajdhani', 'Arial Narrow', sans-serif;
+    --body:'Inter', system-ui, -apple-system, sans-serif;
+    --maxw:880px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:
+      repeating-linear-gradient(0deg, rgba(238,243,236,0.025) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, rgba(238,243,236,0.025) 0 1px, transparent 1px 28px),
+      var(--bg);
+    color:var(--silk);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:var(--copper-light); text-decoration:none; }
+  a:hover{ color:var(--amber); }
+  :focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
+
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  /* ---- nav ---- */
+  .nav{
+    position:sticky; top:0; z-index:20;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+    background:rgba(15,46,31,0.85);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease;
+  }
+  .nav.scrolled{ border-bottom-color:var(--line); }
+  .nav-brand{ font-family:var(--mono); font-size:.85rem; letter-spacing:.08em; color:var(--silk-dim); }
+  .nav-links{ display:flex; gap:20px; list-style:none; margin:0; padding:0; font-family:var(--mono); font-size:.8rem; }
+  .nav-links a{ color:var(--silk); }
+
+  /* ---- edit flags ---- */
+  .edit-flag, .edit-flag-inline{
+    font-family:var(--mono);
+    font-size:.68rem;
+    color:var(--amber);
+    border:1px dashed rgba(242,169,59,0.5);
+    border-radius:4px;
+    padding:1px 6px;
+    white-space:nowrap;
+  }
+  .edit-flag-inline{ display:inline; }
+
+  /* ---- hero ---- */
+  .hero{ position:relative; padding:96px 0 72px; overflow:hidden; }
+  .hero-trace{ position:absolute; top:-10px; right:-40px; width:60%; max-width:520px; opacity:.55; z-index:0; }
+  .hero-trace path{ fill:none; stroke:var(--copper); stroke-width:2.5; stroke-dashoffset:0; }
+  .hero-trace circle{ fill:var(--amber); }
+  @media (prefers-reduced-motion:no-preference){
+    .hero-trace path{ stroke-dasharray:1100; stroke-dashoffset:1100; animation:draw 1.8s ease-out .2s forwards; }
+    @keyframes draw{ to{ stroke-dashoffset:0; } }
+  }
+  .hero-inner{ position:relative; z-index:1; }
+  .eyebrow{ font-family:var(--mono); font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--copper-light); }
+  .hero h1{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(2.4rem, 7vw, 4.2rem);
+    margin:.3em 0 .1em; line-height:.98; letter-spacing:.01em;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  }
+  .role{ font-size:clamp(1rem,2.4vw,1.2rem); color:var(--silk); margin:.2em 0; font-weight:500; }
+  .thesis{ font-size:clamp(1rem,2.2vw,1.15rem); color:var(--silk-dim); max-width:46ch; margin:.9em 0 1.6em; }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--mono); font-size:.85rem;
+    padding:12px 20px; border-radius:6px; display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--line);
+  }
+  .btn-primary{ background:var(--amber); color:var(--bg); border-color:var(--amber); font-weight:600; }
+  .btn-primary:hover{ background:var(--copper-light); color:var(--bg); }
+  .btn-ghost{ color:var(--silk); }
+  .btn-ghost:hover{ border-color:var(--copper-light); color:var(--copper-light); }
+
+  /* ---- sections generic ---- */
+  section{ padding:64px 0; border-top:1px solid var(--line); }
+  .section-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:8px; flex-wrap:wrap; }
+  .tag{ font-family:var(--mono); font-size:.8rem; color:var(--copper-light); letter-spacing:.05em; }
+  .section-title{ font-family:var(--display); font-weight:600; font-size:clamp(1.5rem,4vw,2rem); margin:0; }
+  .section-sub{ color:var(--silk-dim); font-size:.92rem; margin:0 0 32px; }
+
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease; }
+  .reveal.in-view{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  /* ---- about ---- */
+  .about p{ max-width:62ch; font-size:1.02rem; }
+
+  /* ---- projects ---- */
+  .project-card{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px; margin-bottom:28px; position:relative;
+  }
+  .project-card::before{
+    content:''; position:absolute; left:-1px; top:28px; bottom:28px; width:3px;
+    background:linear-gradient(180deg, var(--copper), transparent);
+    border-radius:2px;
+  }
+  .gallery{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(130px,1fr));
+    gap:12px; margin-bottom:20px;
+  }
+  .gallery-item{
+    aspect-ratio:4/3; border:1px dashed var(--line); border-radius:6px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    color:var(--silk-dim); font-family:var(--mono); font-size:.72rem; text-align:center; padding:10px;
+    background:rgba(238,243,236,0.02);
+  }
+  .gallery-item:has(img), .gallery-item:has(video){
+    aspect-ratio:auto; padding:8px; border-style:solid;
+  }
+  .gallery-item img,
+  .gallery-item video{
+    width:100%; aspect-ratio:4/3; object-fit:cover; display:block; border-radius:4px;
+  }
+  .gallery-item svg{ width:26px; height:26px; opacity:.6; }
+  .gallery-item.add-tile{ border-color:rgba(242,169,59,0.5); color:var(--amber); }
+  .gallery-item.add-tile svg{ opacity:.9; }
+  .project-card h3{
+    font-family:var(--display); font-weight:600; font-size:1.4rem; margin:0 0 16px;
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .spec{ display:grid; grid-template-columns:max-content 1fr; gap:6px 18px; margin:0 0 18px; font-size:.9rem; }
+  .spec dt{ font-family:var(--mono); font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; color:var(--copper-light); }
+  .spec dd{ margin:0; color:var(--silk); }
+  .desc{ color:var(--silk-dim); font-size:.98rem; margin:0; }
+  .desc .edit-flag-inline{ display:inline; white-space:normal; line-height:1.5; }
+
+  /* ---- skills / fuse grid ---- */
+  .fuse-grid{ display:flex; flex-wrap:wrap; gap:28px; }
+  .fuse{ display:flex; flex-direction:column; align-items:center; gap:10px; width:96px; }
+  .fuse-body{
+    width:54px; height:76px; border-radius:9px 9px 4px 4px; position:relative;
+    background:linear-gradient(180deg, var(--fuse-color) 0 36%, rgba(238,243,236,0.06) 36% 100%);
+    border:1px solid rgba(238,243,236,0.18);
+  }
+  .fuse-body::before, .fuse-body::after{
+    content:''; position:absolute; bottom:-9px; width:4px; height:11px;
+    background:var(--silk-dim); border-radius:1px;
+  }
+  .fuse-body::before{ left:15px; }
+  .fuse-body::after{ right:15px; }
+  .fuse-label{ font-size:.85rem; text-align:center; font-weight:500; }
+  .fuse-amp{ font-family:var(--mono); font-size:.68rem; color:var(--silk-dim); }
+
+  /* ---- contact ---- */
+  .contact-grid{ display:flex; flex-wrap:wrap; gap:14px; }
+  .contact-item{
+    font-family:var(--mono); font-size:.88rem; border:1px solid var(--line); border-radius:6px;
+    padding:12px 18px; display:flex; align-items:center; gap:8px;
+  }
+
+  footer{ padding:36px 24px 60px; text-align:center; color:var(--silk-dim); font-family:var(--mono); font-size:.78rem; }
+
+  @media (max-width:640px){
+    .hero{ padding:64px 0 48px; }
+    section{ padding:48px 0; }
+    .project-card{ padding:20px; }
+    .nav-links{ gap:12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <span class="nav-brand">Luiz_Alberto</span>
+  <ul class="nav-links">
+    <li><a href="#baja">Baja</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="#ferramentas">Ferramentas</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="topo">
+  <svg class="hero-trace" viewBox="0 0 600 300" aria-hidden="true">
+    <path d="M20,260 L20,190 L140,190 L140,110 L280,110 L280,50 L440,50 L440,150 L580,150"/>
+    <circle cx="140" cy="190" r="5"/>
+    <circle cx="280" cy="110" r="5"/>
+    <circle cx="440" cy="150" r="5"/>
+  </svg>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Portfólio</span>
+    <h1>Luiz Alberto G. Gomes </h1>
+    <p class="role">Engenharia Aeroespacial — UFABC · Baja Quero-Quero</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#projetos">Ver projetos</a>
+      <a class="btn btn-ghost" href="docs\CurriculoLA_ACF.pdf" target="_blank" rel="noopener">Baixar currículo (PDF) </a>
+    </div>
+  </div>
+</header>
+
+<section class="about reveal" id="sobre">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">/// sobre</span>
+      <h2 class="section-title">Quem projeta isso</h2>
+    </div>
+    <p>Olá! Me chamo Luiz Alberto, tenho 19 anos e moro em Diadema-SP. Minha trajetória na tecnologia começou com a
+        formação técnica em Análise e Desenvolvimento de Sistemas pela ETEC Lauro Gomes e, atualmente, sou estudante de
+        Ciência e Tecnologia com foco em Engenharia Aeroespacial na UFABC.</p>
+      <p>Movido pela minha paixão por automobilismo e por aplicar a engenharia na prática, faço parte da equipe de Baja
+        SAE, a Baja Quero-Quero, onde atuo no subsistema de eletrônica. Junto com o time, participo de todo o ciclo do
+        projeto: desde o planejamento da arquitetura elétrica do veículo até a manufatura do chicote elétrico e seus
+        componentes. Também trabalhamos fortemente com Pesquisa e Desenvolvimento (P&D) para criar soluções inovadoras
+        que suportem as condições extremas da pista.</p>
+  </div>
+</section>
+
+<section class="baja reveal" id="baja">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">/// contexto</span>
+      <h2 class="section-title">O que é o Baja SAE</h2>
+    </div>
+    <p>O Baja SAE é uma competição universitária de engenharia, organizada pela SAE Brasil, em que equipes projetam, fabricam e correm com um carro off-road monoposto construído do zero, seguindo um regulamento técnico rígido. O carro enfrenta provas de resistência, aceleração, tração e suspensão, normalmente na lama, poeira e terreno irregular. É engenharia real sob prazo curto, orçamento apertado e prova de fogo mecânica. Faço parte da Baja Quero-Quero, equipe representativa da UFABC. Somos um time recém-reestruturado com grande foco técnico e competitividade. Abaixo, detalho alguns projetos práticos que desenvolvi em pouco menos de um ano atuando no subsistema eletrônico.</p>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="img/baja/img1.jpeg" alt="Carro na prova do Baja">
+      </div>
+      <div class="gallery-item">
+        <img src="img/baja/img2.jpeg" alt="Equipe Baja Quero-Quero">
+      </div>
+      <div class="gallery-item">
+        <img src="img/baja/img3.jpeg" alt="Percurso da prova dinâmica">
+      </div>
+  
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projetos">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">/// projetos</span>
+      <h2 class="section-title">Mão na massa!</h2>
+    </div>
+
+    <article class="project-card reveal">
+      <div class="gallery">
+        <div class="gallery-item">
+          
+          <img src="img/proj1/img1.png" alt="Render CAD da caixa de fusíveis no SolidWorks">
+          Render CAD (SolidWorks)
+        </div>
+        <div class="gallery-item">
+          <img src="img/proj1/img2.png" alt="Caixa de fusíveis montada">
+          Render CAD (SolidWorks)
+        </div>
+      </div>
+      <h3>Caixa de Fusíveis</h3>
+      <dl class="spec">
+        <dt>Ferramenta</dt><dd>SolidWorks</dd>
+        <dt>Função</dt><dd>Proteção e organização dos circuitos do chicote</dd>
+        <dt>Autoria</dt><dd>Projeto 100% próprio</dd>
+      </dl>
+      <p class="desc">Projetei a caixa de fusíveis do veículo do zero utilizando o SolidWorks. Ela foi dimensionada para acomodar 12 fusíveis e integra um botão de emergência tipo cogumelo (kill switch) em sua face inclinada. O projeto previu o comportamento da peça em condições severas de prova, possui vedação com um anel de borracha contra água e poeira, dimensionamento estrutural para que a força de fixação seja igualmente distribuída, e cantos arredondados para mitigar o acúmulo de tensões mecânicas nas extremidades, evitando eventuais quebras por vibração.</p>
+    </article>
+
+    <article class="project-card reveal">
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="img/proj2/img1.jpg" alt="Bancada de montagem do chicote elétrico">
+          Esquema Elétrico (KiCad)
+        </div>
+      </div>
+      <h3>Chicote Elétrico </h3>
+      <dl class="spec">
+        <dt>Ferramenta</dt><dd>KiCad (esquemático) + montagem física</dd>
+        <dt>Função</dt><dd>Distribuição de energia e sinal para os sistemas do carro</dd>
+        <dt>Autoria</dt><dd>Subsistema de eletrônica do Baja Quero-Quero</dd>
+      </dl>
+      <p class="desc">Em conjunto com a equipe, projetamos e manufaturamos o chicote elétrico focado em resistir à vibração constante, ao calor do motor e ao contato com água e lama. Utilizamos conectores automotivos selados, executamos o roteamento para afastar os circuitos de zonas críticas de temperatura, e estruturamos a fiação de forma modular, garantindo fácil acesso para diagnósticos rápidos e futuras atualizações no sistema.</p>
+    </article>
+  </div>
+</section>
+
+
+<section class="contact" id="contato">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">/// contato</span>
+      <h2 class="section-title">Bora conversar</h2>
+    </div>
+    <div class="contact-grid reveal">
+      <a class="contact-item" href="mailto:voce@email.com"><u>aluiz5342@gmail.com</u></a>
+      <a class="contact-item" href="www.linkedin.com/in/luiz-alberto-094778346" target="_blank" rel="noopener"><u>Linkedin: Luiz Alberto</u></a>
+    </div>
+  </div>
+</section>
+
+<footer>Feito por Luiz Alberto</footer>
+
+<script>
+  // sticky nav background after scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  }, { passive: true });
+
+  // reveal-on-scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+</script>
+
+</body>
+</html>
