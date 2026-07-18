@@ -502,7 +502,7 @@ footer {
 }
 
 /* =========================================
-   5. RESPONSIVIDADE (Mobile)
+   5. RESPONSIVIDADE
    ========================================= */
 @media (max-width: 640px) {
   .hero { padding: 64px 0 48px; }
